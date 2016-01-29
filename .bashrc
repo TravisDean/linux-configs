@@ -32,4 +32,4 @@ alias cd=cdfunct
 
 #export PATH=$PATH:~/apps/MatlabInstall/bin
 
-
+export PS1="\e[01;34m \w \$ \e[m"
