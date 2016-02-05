@@ -58,11 +58,11 @@ endif
 map <F4> mzgg=G`z<CR> 
 filetype plugin indent on  "Also required for vundle
 
-map <F5> :!python %:t<CR> 
+map <F5> :!python main.py data.cl && cat data.cl-lex <CR>
 "map <F6> :!make<CR>
 "map <F7> :!make && ./a.out :t<CR> 
-"map <F8> :!make && mono run.exe :t<CR>
-"map <F9> :!./run :t<CR> 
+map <F8> :!cool --lex --out cldata data.cl && cat cldata.cl-lex <CR>
+map <F9> :!diff -u -b data.cl-lex cldata.cl-lex <CR>
 
 "Some autoheaders, mainly for file types with comments deliminated by //
 "autocmd bufnewfile *.* so /home/travis/configs/header.txt
