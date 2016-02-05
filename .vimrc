@@ -62,7 +62,7 @@ map <F5> :!python main.py data.cl && cat data.cl-lex <CR>
 "map <F6> :!make<CR>
 "map <F7> :!make && ./a.out :t<CR> 
 map <F8> :!cool --lex --out cldata data.cl && cat cldata.cl-lex <CR>
-map <F9> :!diff -u -b data.cl-lex cldata.cl-lex <CR>
+map <F9> :!diff -s -u -b -E -w data.cl-lex cldata.cl-lex <CR>
 
 "Some autoheaders, mainly for file types with comments deliminated by //
 "autocmd bufnewfile *.* so /home/travis/configs/header.txt
@@ -159,3 +159,14 @@ set wildmenu
 autocmd FileType ocaml setlocal shiftwidth=2 softtabstop=2
 
 nmap ; :
+
+
+" Commenting blocks of code.
+autocmd FileType c,cpp,java,scala let b:comment_leader = '// '
+autocmd FileType sh,ruby,python   let b:comment_leader = '# '
+autocmd FileType conf,fstab       let b:comment_leader = '# '
+autocmd FileType tex              let b:comment_leader = '% '
+autocmd FileType mail             let b:comment_leader = '> '
+autocmd FileType vim              let b:comment_leader = '" '
+noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
+noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
