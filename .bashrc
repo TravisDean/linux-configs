@@ -16,7 +16,7 @@ alias vimrc='vim ~/.vimrc'
 alias bashrc='vim ~/.bashrc'
 alias oci='rlwrap ocaml'
 
-alias zipldi='zip tjd2qj.zip *.py && cp tjd2qj.zip /mnt/hgfs/Mint/Shared/'
+alias zipldi='zip tjd2qj.zip *.py good.cl bad.cl readme.txt && cp tjd2qj.zip /mnt/hgfs/Mint/Shared/'
 
 # Bookmarks are cool, but normally I forget to use them
 #source ~/.local/bin/bashmarks.sh 

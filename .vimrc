@@ -1,8 +1,7 @@
-map <F5> :!rm data.cl-lex ; python main.py data.cl ; cat data.cl-lex <CR>
-"map <F6> :!make<CR>
-"map <F7> :!make && ./a.out :t<CR> 
-map <F8> :!rm cldata.cl-lex ; cool --lex --out cldata data.cl ; cat cldata.cl-lex <CR>
-map <F9> :!diff -s -u -b -E -w data.cl-lex cldata.cl-lex <CR>
+map <F5> :!rm data.cl-ast ; cool --lex data.cl && python main.py data.cl-lex && cat data.cl-ast <CR>
+map <F6> :!rm cldata.cl-ast ; cool --parse --out cldata data.cl ; cat cldata.cl-ast <CR>
+map <F7> :!diff -s -u -b -E -w data.cl-ast cldata.cl-ast <CR>
+map <F8> :!vimdiff data.cl-ast cldata.cl-ast <CR>
 
 "Vundle settings from the github
 set nocompatible
@@ -15,18 +14,11 @@ call vundle#rc()
 Plugin 'VundleVim/Vundle.vim'
 
 "My bundles here:
-"Bundle 'Valloric/YouCompleteMe'
 Bundle 'sjl/gundo.vim'
 nnoremap <F10> :GundoToggle<CR> 
 
-"A smooth scrolling  plugin?
-"Bundle 'terryma/vim-smooth-scroll'
-"And associated bindings!
-"noremap <silent> <c-u> :call smooth_scroll#up(&scroll/3, 2, 4)<CR> 
-"noremap <silent> <c-e> :call smooth_scroll#down(&scroll/3, 2,4)<CR>
-"noremap <silent> <c-u> :call smooth_scroll#up(&scroll*2, 0, 10)<CR> 
-"noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
-"TODO: Check out if those faster ones seem worth it
+Bundle 'Valloric/YouCompleteMe'
+
 
 "Fix backspace back to the way it was, damn it
 set backspace=indent,eol,start
@@ -97,10 +89,11 @@ abbr #d #define
 
 colorscheme evening
 
-augroup reload_vimrc " {
-    autocmd!
-    autocmd BufWritePost $MYVIMRC source $MYVIMRC
-augroup END " }
+" augroup reload_vimrc " {
+"     autocmd!
+"     autocmd BufWritePost $MYVIMRC source $MYVIMRC
+" augroup END " }
+autocmd! BufWritePost .vimrc source %
 
 set splitbelow
 set splitright
@@ -158,9 +151,9 @@ set wildmode=longest,list,full
 set wildmenu
 
 autocmd FileType ocaml setlocal shiftwidth=2 softtabstop=2
+autocmd FileType c setlocal shiftwidth=4 softtabstop=4
 
 nmap ; :
-
 
 " Commenting blocks of code.
 autocmd FileType c,cpp,java,scala let b:comment_leader = '// '
