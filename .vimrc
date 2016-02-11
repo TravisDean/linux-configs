@@ -1,7 +1,7 @@
 map <F5> :!rm data.cl-ast ; cool --lex data.cl && python main.py data.cl-lex && cat data.cl-ast <CR>
-map <F6> :!rm cldata.cl-ast ; cool --parse --out cldata data.cl ; cat cldata.cl-ast <CR>
-map <F7> :!diff -s -u -b -E -w data.cl-ast cldata.cl-ast <CR>
-map <F8> :!vimdiff data.cl-ast cldata.cl-ast <CR>
+map <F8> :!rm cldata.cl-ast ; cool --parse --out cldata data.cl ; cat cldata.cl-ast <CR>
+map <F9> :!diff -s -u -b -E -w data.cl-ast cldata.cl-ast <CR>
+map <S-F9> :!vimdiff data.cl-ast cldata.cl-ast <CR>
 
 "Vundle settings from the github
 set nocompatible
@@ -16,8 +16,10 @@ Plugin 'VundleVim/Vundle.vim'
 "My bundles here:
 Bundle 'sjl/gundo.vim'
 nnoremap <F10> :GundoToggle<CR> 
-
 Bundle 'Valloric/YouCompleteMe'
+
+"Auto tag
+Bundle 'craigemery/vim-autotag'
 
 
 "Fix backspace back to the way it was, damn it
