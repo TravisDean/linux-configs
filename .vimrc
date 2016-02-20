@@ -1,6 +1,6 @@
-map <F5> :!rm data.cl-ast ; cool --lex data.cl && python main.py data.cl-lex && cat data.cl-ast <CR>
-map <F8> :!rm cldata.cl-ast ; cool --parse --out cldata data.cl ; cat cldata.cl-ast <CR>
-map <F9> :!diff -s -u -b -E -w data.cl-ast cldata.cl-ast <CR>
+map <F5> :!./testmine.sh <CR>
+map <F8> :!./testref.sh <CR>
+map <F9> :!./test.sh <CR>
 map <S-F9> :!vimdiff data.cl-ast cldata.cl-ast <CR>
 
 "Vundle settings from the github

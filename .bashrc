@@ -34,4 +34,7 @@ alias cd=cdfunct
 
 #export PATH=$PATH:~/apps/MatlabInstall/bin
 
-export PS1="\e[01;35m \w \$ \e[m"
+#export PS1="\e[01;35m \w \$ \e[m"
+export PS1="\[\033[38;5;140m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;140m\]>\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"
+
+
