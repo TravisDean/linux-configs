@@ -99,6 +99,7 @@ alias tree='tree -Csuh' # You'll need to get tree for this one
 alias home='cd ~'
 alias vimrc='vim ~/.vimrc'
 alias zshrc='vim ~/.zshrc'
+alias zash='vim ~/.zshrc'
 
 function ff() { find . -type f -iname '*'"$*"'*' ; }
 function cdfunct() {    cd "$1";  ls; }
