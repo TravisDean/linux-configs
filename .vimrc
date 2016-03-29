@@ -1,6 +1,7 @@
 map <F5> :!./testmine.sh <CR>
 map <F8> :!./testref.sh <CR>
 map <F9> :!./test.sh <CR>
+map <F7> :!./run_production.sh <CR>
 map <S-F9> :!vimdiff data.cl-ast cldata.cl-ast <CR>
 
 "Vundle settings from the github
@@ -20,6 +21,10 @@ Bundle 'Valloric/YouCompleteMe'
 
 "Auto tag
 Bundle 'craigemery/vim-autotag'
+
+"Targets
+Bundle 'wellle/targets.vim'
+
 
 
 "Fix backspace back to the way it was, damn it
@@ -155,7 +160,11 @@ set wildmenu
 autocmd FileType ocaml setlocal shiftwidth=2 softtabstop=2
 autocmd FileType c setlocal shiftwidth=4 softtabstop=4
 
+set autoread
+
 nmap ; :
+
+nnoremap Y y$
 
 " Commenting blocks of code.
 autocmd FileType c,cpp,java,scala let b:comment_leader = '// '

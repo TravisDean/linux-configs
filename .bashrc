@@ -28,6 +28,7 @@ function ff() { find . -type f -iname '*'"$*"'*' ; }
 function cdfunct() {    cd "$1";  ls; }
 alias cd=cdfunct
 
+alias pkgfind='pkg-config --list-all | grep'
 
 # added by Anaconda3 2.1.0 installer
 #export PATH="/home/travis/anaconda3/bin:$PATH"
@@ -37,4 +38,8 @@ alias cd=cdfunct
 #export PS1="\e[01;35m \w \$ \e[m"
 export PS1="\[\033[38;5;140m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;140m\]>\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"
 
-
+#export PREFIX="~/git-gimp"
+#export PATH="$PREFIX/bin:$PATH"
+#export PKG_CONFIG_PATH="$PREFIX/lib/pkgconfig:$PKG_CONFIG_PATH"
+#export LD_LIBRARY_PATH="$PREFIX/lib:$LD_LIBRARY_PATH"
+#export ACLOCAL_FLAGS="-I $PREFIX/share/aclocal $ACLOCAL_FLAGS"
