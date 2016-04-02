@@ -84,9 +84,9 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias canhaz='sudo aptitude install'
-#alias ls='ls --color --group-directories-first'
-#alias la='ls -A'
-#alias ll='ls -h -lv --group-directories-first'
+alias ls='ls --color --group-directories-first'
+alias la='ls -A'
+alias ll='ls -h -lv --group-directories-first'
 alias lll='ls -A -h -lv --group-directories-first'
 alias df='df -kTh'
 #alias du='du -hk'
@@ -106,3 +106,4 @@ function cdfunct() {    cd "$1";  ls; }
 alias cd=cdfunct
 
 alias pkgfind='pkg-config --list-all | grep'
+alias aptfind='apt-cache search'
