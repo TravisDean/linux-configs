@@ -37,7 +37,7 @@ if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 let g:airline_symbols.space = "\ua0"
-
+set fillchars+=stl:\ ,stlnc:\ 
 " 256 Colors
 Bundle 'noah/vim256-color'
 
@@ -172,11 +172,20 @@ nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j 
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l 
+nmap <leader>h <C-w>h
+nmap <leader>j <C-w>j 
+nmap <leader>k <C-w>k
+nmap <leader>l <C-w>l 
 ""Remap window rearrangement 
 nmap <C-m>h <C-w>H
 nmap <C-m>j <C-w>J 
 nmap <C-m>k <C-w>K
 nmap <C-m>l <C-w>L 
+
+nmap <leader>mh <C-w>H
+nmap <leader>mj <C-w>J 
+nmap <leader>mk <C-w>K
+nmap <leader>ml <C-w>L 
 
 " Fast window resizing with +/- keys (horizontal); / and * keys (vertical)
   map <kPlus> <C-W>+
@@ -219,6 +228,7 @@ autocmd FileType conf,fstab       let b:comment_leader = '# '
 autocmd FileType tex              let b:comment_leader = '% '
 autocmd FileType mail             let b:comment_leader = '> '
 autocmd FileType vim              let b:comment_leader = '" '
+autocmd FileType zsh              let b:comment_leader = '# '
 noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
 noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
 

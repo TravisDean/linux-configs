@@ -95,16 +95,27 @@ alias path='echo -e ${PATH//:/\\n}'
 #alias libpath='echo -e ${LD_LIBRARY_PATH//:/\\n}'
 #alias so=source
 alias tree='tree -Csuh' # You'll need to get tree for this one
-#alias ..='cd ..'
+alias ..='cd ..'
 alias home='cd ~'
 alias vimrc='vim ~/.vimrc'
 alias zshrc='vim ~/.zshrc'
 alias zash='vim ~/.zshrc'
 alias oci='rlwrap ocaml'
+alias historysum='history | cut -c 8-100 | cut -d " " -f 1-1 | sort | uniq -c | sort -n'
 
 function ff() { find . -type f -iname '*'"$*"'*' ; }
+
+function cdnolsfunc() { cd "$1" }
+alias cdnl=cdnolsfunc
+
 function cdfunct() {    cd "$1";  ls; }
 alias cd=cdfunct
+
+
+setopt AUTO_CD
+
+function locx() { locate -b "\\$1" }
+#alias locx=exactlocate
 
 alias pkgfind='pkg-config --list-all | grep'
 alias aptfind='apt-cache search'
