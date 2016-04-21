@@ -100,6 +100,7 @@ alias home='cd ~'
 alias vimrc='vim ~/.vimrc'
 alias zshrc='vim ~/.zshrc'
 alias zash='vim ~/.zshrc'
+alias oci='rlwrap ocaml'
 
 function ff() { find . -type f -iname '*'"$*"'*' ; }
 function cdfunct() {    cd "$1";  ls; }
@@ -107,3 +108,21 @@ alias cd=cdfunct
 
 alias pkgfind='pkg-config --list-all | grep'
 alias aptfind='apt-cache search'
+
+
+fancy-ctrl-z () {
+  if [[ $#BUFFER -eq 0 ]]; then
+    BUFFER="fg"
+    zle accept-line
+  else
+    zle push-input
+    zle clear-screen
+  fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z' fancy-ctrl-z
+
+# OPAM configuration
+. /home/travis/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+export TERM=xterm-256color

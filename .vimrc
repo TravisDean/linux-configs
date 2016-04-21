@@ -18,6 +18,8 @@ Plugin 'VundleVim/Vundle.vim'
 Bundle 'sjl/gundo.vim'
 nnoremap <F10> :GundoToggle<CR> 
 Bundle 'Valloric/YouCompleteMe'
+let mapleader = "\<Space>"
+nnoremap <leader>t :YcmCompleter GetType<CR>
 
 "Auto tag
 Bundle 'craigemery/vim-autotag'
@@ -25,16 +27,71 @@ Bundle 'craigemery/vim-autotag'
 "Targets
 Bundle 'wellle/targets.vim'
 
+"Airline
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+let g:airline_powerline_fonts = 1
+let g:airline_theme='kolor'
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
+
+" 256 Colors
+Bundle 'noah/vim256-color'
+
+"Set some statusline stuff
+set laststatus=2
+
+"messan's
+" set statusline=   " clear the statusline for when vimrc is reloaded
+" set statusline+=%-3.3n\                      " buffer number
+" set statusline+=%f\                          " file name
+" set statusline+=%h%m%r%w                     " flags
+" set statusline+=[%{strlen(&ft)?&ft:'none'},  " filetype
+" set statusline+=%{strlen(&fenc)?&fenc:&enc}, " encoding
+" set statusline+=%{&fileformat}]              " file format
+" set statusline+=%=                           " right align
+" set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\  " highlight
+" set statusline+=%b,0x%-8B\                   " current char
+" set statusline+=%-14.(%l,%c%V%)\ %<%P        " offset
+
+Plugin 'terryma/vim-expand-region'
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
+
+vnoremap <silent> y y`]
+vnoremap <silent> p p`]
+nnoremap <silent> p p`]
 
 
 "Fix backspace back to the way it was, damn it
 set backspace=indent,eol,start
 
-"Bundle 'scrooloose/syntastic'
+Bundle 'scrooloose/syntastic'
 "let g:syntastic_mode_ap = {'more': 'active',
             "\ 'active_filetypes': [],
             "\ 'passive_filetypes': ['html'] }
 "highlight SyntasticErrorSign guifg=white guibg=red
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"
+
+let g:syntastic_ocaml_checkers = ['merlin']
+
+"If you use `:mksession` to save Vim sessions you should probably make sure to
+"remove option "blank" from 'sessionoptions': >
+set sessionoptions-=blank
+
 
 syntax on  "Had to add after vundle stuff
 
@@ -47,6 +104,7 @@ set undolevels=1000
 set undoreload=10000
 
 set incsearch  " Keep matching
+set ignorecase
 set smartcase  " Only lower: case insensitive; if any upper, case sensitive
 
 "Have the title string show the path and name of the file.
@@ -62,16 +120,6 @@ endif
 "Reindent the whole file
 map <F4> mzgg=G`z<CR> 
 filetype plugin indent on  "Also required for vundle
-
-
-"Some autoheaders, mainly for file types with comments deliminated by //
-"autocmd bufnewfile *.* so /home/travis/configs/header.txt
-"autocmd bufnewfile *.* exe "1," . 9 . "g/File Name :.*/s//File Name : " .expand("%")
-"autocmd bufnewfile *.* exe "1," . 9 . "g/Creation Date :.*/s//Creation Date : " .strftime("%a %b %d %Y")
-"autocmd Bufwritepre,filewritepre *.*, execute "normal mz"
-"autocmd Bufwritepre,filewritepre *.*, exe "1," . 9 . "g/File Name :.*/s/File Name :.*/File Name : " .expand("%")."/e"
-"autocmd Bufwritepre,filewritepre *.*, exe "1," . 9 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%a %b %d %Y %T")."/e"
-"autocmd bufwritepost,filewritepost *.*, execute "normal `z"
 
 "Turn on spell checking for .txt files
 autocmd FileType notes setlocal spell
@@ -94,7 +142,7 @@ nmap <C-N><C-N> :set invnumber<CR>
 abbr #i #include
 abbr #d #define 
 
-colorscheme evening
+colorscheme oxeded
 
 " augroup reload_vimrc " {
 "     autocmd!
@@ -116,6 +164,8 @@ endif
 "Make asm files use nasm stuff
 au BufRead,BufNewFile *.asm set filetype=nasm
 
+au BufRead,BufNewFile *.ml,*.mli compiler ocaml
+
 
 ""Remap movement between windows 
 nmap <C-h> <C-w>h
@@ -127,24 +177,20 @@ nmap <C-m>h <C-w>H
 nmap <C-m>j <C-w>J 
 nmap <C-m>k <C-w>K
 nmap <C-m>l <C-w>L 
+
+" Fast window resizing with +/- keys (horizontal); / and * keys (vertical)
+  map <kPlus> <C-W>+
+  map <kMinus> <C-W>-
+  map <kDivide> <c-w><
+  map <kMultiply> <c-w>>
+
+set so=7
+nnoremap e 5<c-e> 
+nnoremap k 5<c-y>
+
 "Get rid of expandtab for Makefiles
 autocmd FileType make set noexpandtab
 
-"Set some statusline stuff
-set laststatus=2
-
-"messan's
-set statusline=   " clear the statusline for when vimrc is reloaded
-set statusline+=%-3.3n\                      " buffer number
-set statusline+=%f\                          " file name
-set statusline+=%h%m%r%w                     " flags
-set statusline+=[%{strlen(&ft)?&ft:'none'},  " filetype
-set statusline+=%{strlen(&fenc)?&fenc:&enc}, " encoding
-set statusline+=%{&fileformat}]              " file format
-set statusline+=%=                           " right align
-set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\  " highlight
-set statusline+=%b,0x%-8B\                   " current char
-set statusline+=%-14.(%l,%c%V%)\ %<%P        " offset
 
 
 set softtabstop=4
@@ -188,3 +234,5 @@ function! XTermPasteBegin()
   set paste
   return ""
 endfunction
+
+
